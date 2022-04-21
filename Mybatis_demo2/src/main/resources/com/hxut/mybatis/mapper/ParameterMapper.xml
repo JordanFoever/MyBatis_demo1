@@ -4,8 +4,39 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hxut.mybatis.mapper.ParameterMapper">
         <!--List<User> getAllUser();-->
-        <select id="getAllUser" resultType="user">
+        <select id="getAllUser" resultType="com.hxut.mybatis.pojo.User">
             select * from t_user;
         </select>
+
+<!--        User getByUserName(String username);-->
+        <select id="getByUserName" resultType="com.hxut.mybatis.pojo.User">
+        <!--select * from t_user where username = #{username} -->
+            select * from t_user where username = '${username}'
+        </select>
+
+<!--        User checkLogin(String username,String password);-->
+        <select id="checkLogin" resultType="com.hxut.mybatis.pojo.User">
+            select * from t_user where username = #{arg0} and  password = #{arg1}
+        </select>
+
+<!--        User checkLoginByMap(Map<String,Object> map);-->
+        <select id="checkLoginByMap" resultType="com.hxut.mybatis.pojo.User">
+            select * from t_user where username = #{username} and password = #{password}
+        </select>
+
+<!--        int insertUser(User user);-->
+        <insert id="insertUser">
+            insert into t_user values(null,#{username},#{password},#{age},#{sex},#{email})
+        </insert>
+
+<!--          User checkLoginByParam(@Param("username") String username, @Param("password") string password);-->
+        <select id="checkLoginByParam" resultType="com.hxut.mybatis.pojo.User">
+            select * from t_user where username = #{username} and password = #{password}
+        </select>
 </mapper>
+
+
+
+
+
 
